@@ -1,0 +1,13 @@
+
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^giftcardstoday\.online$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.giftcardstoday\.online$
+RewriteRule ^/?$ "https\:\/\/giftcardstoday\.online\/" [R=301,L]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^giftcards2day\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.giftcards2day\.com$
+RewriteRule ^/?$ "https\:\/\/giftcards2day\.com\/" [R=301,L]
+
