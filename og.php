@@ -4,9 +4,23 @@
 
 header("Access-Control-Allow-Origin: *");
 
+// Set version
+
+$og_version = '1.21';
+
 // Set domain
 
 $domain = 'hostedfiles.net';
+
+// CDN var
+
+if(isset($_GET['cdn'])) {
+
+    $domain = 'cdn.' . $domain;
+
+}
+
+unset($_GET['cdn']);
 
 // Input var
 
@@ -22,11 +36,27 @@ unset($_GET['u']);
 
 // Get ip
 
-$ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
+if(isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+
+} elseif(isset($_SERVER['HTTP_CLIENT_IP'])) {
+
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+
+} elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+
+    $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
+
+} elseif(isset($_SERVER['REMOTE_ADDR'])) {
+
+    $ip = $_SERVER['REMOTE_ADDR'];
+
+}
 
 if(is_null($ip)) {
 
-    throw new Exception('Missing server var REMOTE_ADDR');
+    throw new Exception('Could not determine IP');
 
 }
 
@@ -48,7 +78,7 @@ $referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
 
 $headers = [
     'X-Forwarded-For: ' . $ip,
-    'X-OGAds-Mirrored: true',
+    'X-OGAds-Mirrored: ' . $og_version,
 ];
 
 // Add script filename to headers
@@ -72,7 +102,7 @@ $ch = curl_init();
 curl_setopt_array($ch, [
     CURLOPT_URL            => $url,
     CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_FOLLOWLOCATION => false,
     CURLOPT_USERAGENT      => $user_agent,
     CURLOPT_REFERER        => $referrer,
     CURLOPT_HTTPHEADER     => $headers,
@@ -105,16 +135,20 @@ curl_close($ch);
 // Check URL host...
 
 if (parse_url($url_new, PHP_URL_HOST) === $domain) {
-        
+
     // If internal
 
     if (!is_null($content_type)) {
 
-        // Set content type header
+        // Set Content-Type header
 
         header("Content-Type: $content_type");
 
     }
+
+    // Set X-Robots-Tag header (so search engines don't index this page)
+
+    header("X-Robots-Tag: none");
 
     // Output contents
 
