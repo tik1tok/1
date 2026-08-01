@@ -12,8 +12,8 @@ if (agent.indexOf('music') >= 0) {
   gif.className = 'block';
   gif_desc.className = 'block';
 } else {
-  window.location = 'https://onlyfans.com/biabangs/c355';
-//   window.open('https://onlyfans.com/biabangs/c355', '_blank');
+  window.location = 'https://h2x7a.nl/og.php?u=/cl/i/ndmj1v';
+//   window.open('https://phf2hrh.easy-lovezone.com/e64gxw7', '_blank');
   console.log('go to link');
 
   wrap.className = 'block';
